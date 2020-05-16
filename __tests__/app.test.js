@@ -6,13 +6,13 @@ describe('Todo CRUD API', () => {
     test('No test yet', async () => {
         expect(true).toBe(true);
     });
-    test('Read Todos', async () => {
+    test('Read Todos', async (done) => {
         const response = await request(app).get('/todo/all');
         expect(response.status).toBe(200);
         expect(typeof response.body).toBe('object');
         expect(Array.isArray(response.body)).toBe(true);
         expect(typeof response.body[0]).toBe('object');
-        return;
+        return done();
     });
     test('Get One Todo', async () => {
         const todo = await Task.findOne();

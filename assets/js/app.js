@@ -36,7 +36,7 @@ async function fetchTodos(){
 
 // declaring variables to add items to the list
 
-let LIST, id;
+let LIST, id = 0;
 
 
 // ** getting items from localStorage **// 
@@ -70,6 +70,7 @@ fetchTodos().then((items) => {
 function loadList(array){
   array.forEach(function(item){
     addToDo(item.name,item.id,item.done,item.trash);
+    id = item.id;
   });
   
 }
@@ -129,14 +130,15 @@ document.addEventListener("keyup", event => {
         name: toDo
       }).then((response) => {
           if(response.status === 200){
+            id++;
             addToDo(toDo, id, false, false);
             LIST.push({
                 name: toDo,
                 id: id,
+                docId: response.data._id ,
                 done: false,
                 trash: false
             });
-            id++;
           }
           // else handle errors here
       }).catch((error) => {
